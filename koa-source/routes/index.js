@@ -1,4 +1,4 @@
-const route = require("koa-router")();
+const route = require("../src/koa-router")();
 const Ctrl = require("../controller");
 const Middle = require("../middlewares");
 
