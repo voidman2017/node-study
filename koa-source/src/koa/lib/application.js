@@ -27,6 +27,9 @@ const deprecate = require('depd')('koa');
  * Inherits from `Emitter.prototype`.
  */
 
+/* 一： Koa类由此诞生，它继承自Events，可得知其子类拥有处理异步事件的能力；
+有三个对象作为实例的属性被初始化，分别为 context、 request、 response， 还有非常熟悉的存放所有全局中间件的数组middleware
+*/
 module.exports = class Application extends Emitter {
   /**
    * Initialize a new `Application`.
@@ -59,7 +62,14 @@ module.exports = class Application extends Emitter {
    * @api public
    */
 
+  /*三： 使用node的原生 http 包来创建 http服务，所有的秘密都藏匿在callback 方法中 */
   listen(...args) {
+    console.log(`args:${args}`);
+    console.log(`this.callback():${this.callback()}`)
+    /* 看一下args和this.callback都有哪些东西,通过输出可以看出:
+    args是listen方法接收到的参数，当前koa应用接收到的是一个端口地址port：9527,和一个回调函数 
+    this.callback是一个函数，接收的两个参数分别是req，res。最终返回 this.handleRequest(ctx, fn);
+    */
     debug('listen');
     const server = http.createServer(this.callback());
     return server.listen(...args);
@@ -101,8 +111,9 @@ module.exports = class Application extends Emitter {
    * @return {Application} self
    * @api public
    */
-
+  /* 二： 当调用use方法时，在确认它是async函数的情况下，通过push操作，这个函数会被追加到middleware数组中 （此时koa还没有真正跑起来，接下来通过listen方法启动koa应用）*/
   use(fn) {
+    /* 确认它是async函数 */
     if (typeof fn !== 'function') throw new TypeError('middleware must be a function!');
     if (isGeneratorFunction(fn)) {
       deprecate('Support for generators will be removed in v3. ' +
@@ -111,6 +122,8 @@ module.exports = class Application extends Emitter {
       fn = convert(fn);
     }
     debug('use %s', fn._name || fn.name || '-');
+
+    /* 通过push操作，这个函数会被追加到middleware数组中 */
     this.middleware.push(fn);
     return this;
   }
