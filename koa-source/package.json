@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon app.js"
+  },
+  "devDependencies": {
+    "co": "^4.6.0",
+    "cross-env": "^5.2.0",
+    "koa": "^2.5.2",
+    "koa-ejs": "^4.1.2",
+    "koa-router": "^7.4.0",
+    "nodemon": "^1.18.3"
+  }
+}

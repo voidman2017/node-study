@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <%=a%>
+
+    
+    <% 
+        const b ='hshhaha' ;
+        let c = [];
+        c.push(1);
+        c.push(4);
+        c.push(3);
+        c.push(2);
+    %>
+    <ul>
+        <% list.forEach(( item, index ) => { %>
+            <li><%=item%></li>
+        <% }) %>
+    </ul>
+
+    <%= b %>
+
+    <ol>
+        <% c.forEach(( item, index ) => { %>
+            <li><%=item%></li>
+        <% }) %>
+    </ol>
+</body>
+</html>
