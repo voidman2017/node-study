@@ -64,13 +64,14 @@ module.exports = class Application extends Emitter {
 
   /*三： 使用node的原生 http 包来创建 http服务，所有的秘密都藏匿在callback 方法中 */
   listen(...args) {
-    console.log(`args:${args}`);
-    console.log(`this.callback():${this.callback()}`)
+    // console.log(`args:${args}`);
+    // console.log(`this.callback():${this.callback()}`)
     /* 看一下args和this.callback都有哪些东西,通过输出可以看出:
     args是listen方法接收到的参数，当前koa应用接收到的是一个端口地址port：9527,和一个回调函数 
     this.callback是一个函数，接收的两个参数分别是req，res。最终返回 this.handleRequest(ctx, fn);
     */
     debug('listen');
+    /* 使用了 node 的原生http包创建了http服务，其中关键点在于this.callback()中 */
     const server = http.createServer(this.callback());
     return server.listen(...args);
   }
@@ -137,6 +138,7 @@ module.exports = class Application extends Emitter {
    */
 
   callback() {
+    /* middleware 应该是被封装成了一个叫做 fn 的对象，通过传入 context 对象来返回一个 Promise */
     const fn = compose(this.middleware);
 
     if (!this.listenerCount('error')) this.on('error', this.onerror);
@@ -147,6 +149,8 @@ module.exports = class Application extends Emitter {
     };
 
     return handleRequest;
+    /* 以上结果等效于：
+    return fn(ctx).then(handleResponse).catch(onerror); */
   }
 
   /**
