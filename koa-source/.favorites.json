@@ -1,0 +1,38 @@
+[
+    {
+        "type": "File",
+        "name": "f:\\github\\node-study\\koa-source\\src\\koa\\lib\\application.js",
+        "parent_id": null,
+        "fsPath": "f:\\github\\node-study\\koa-source\\src\\koa\\lib\\application.js",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "ayPQNBuvkFIjcwVU"
+    },
+    {
+        "type": "File",
+        "name": "f:\\github\\node-study\\koa-source\\src\\koa\\lib\\context.js",
+        "parent_id": null,
+        "fsPath": "f:\\github\\node-study\\koa-source\\src\\koa\\lib\\context.js",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "qxbSIVnA0valZRPU"
+    },
+    {
+        "type": "File",
+        "name": "f:\\github\\node-study\\koa-source\\src\\koa\\lib\\request.js",
+        "parent_id": null,
+        "fsPath": "f:\\github\\node-study\\koa-source\\src\\koa\\lib\\request.js",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "khxsabfBE3eYWnqA"
+    },
+    {
+        "type": "File",
+        "name": "f:\\github\\node-study\\koa-source\\src\\koa\\lib\\response.js",
+        "parent_id": null,
+        "fsPath": "f:\\github\\node-study\\koa-source\\src\\koa\\lib\\response.js",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "MvsC6H5VLF1aqSzn"
+    }
+]

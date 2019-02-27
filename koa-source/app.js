@@ -16,23 +16,27 @@ koaEjs(app, {
     debug: false,//dubug
 });
 
-app.use( Middle.Handler.error );
+// app.use( Middle.Handler.error );
 
 //应用路由
-app.use(routes.routes());
+// app.use(routes.routes());
 
-app.use(async (ctx, next)=>{
+app.use(middleware1);
+
+app.use(middleware2);
+
+
+async function middleware1(ctx, next){
     console.log('middleware1-start');
     next();
     console.log('middleware1-end')
-});
+}
 
-app.use(async (ctx, next)=>{
+async function middleware2(ctx, next){
     console.log('middleware2-start');
     next();
     console.log('middleware2-end')
-});
-
+}
 
 app.listen(CONF.PORT, () => {
     console.log("运行环境", process.env.NODE_ENV);

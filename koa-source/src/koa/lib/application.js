@@ -124,7 +124,9 @@ module.exports = class Application extends Emitter {
     }
     debug('use %s', fn._name || fn.name || '-');
 
-    /* 通过push操作，这个函数会被追加到middleware数组中 */
+    /* 通过push操作，这个函数会被追加到middleware数组中；
+    由此可见，去除校验部分，use实际上做了一件事情，就是把中间件添加到middleware中
+    */
     this.middleware.push(fn);
     return this;
   }
@@ -178,6 +180,9 @@ module.exports = class Application extends Emitter {
     const context = Object.create(this.context);
     const request = context.request = Object.create(this.request);
     const response = context.response = Object.create(this.response);
+    /* 以下的各种相互等于是为了让各个对象能够相互引用
+      并且ctx代理request和response中的属性和方法
+    */
     context.app = request.app = response.app = this;
     context.req = request.req = response.req = req;
     context.res = request.res = response.res = res;
