@@ -39,6 +39,9 @@ async function middleware2(ctx, next){
 }
 
 app.listen(CONF.PORT, () => {
-    console.log("运行环境", process.env.NODE_ENV);
-    console.log("listen port", CONF.PORT)
+    // console.log("运行环境", process.env.NODE_ENV);
+    // console.log("listen port", CONF.PORT)
 });
+
+
+// console.log(app)

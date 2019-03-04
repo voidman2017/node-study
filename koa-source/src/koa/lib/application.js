@@ -22,6 +22,21 @@ const only = require('only');
 const convert = require('koa-convert');
 const deprecate = require('depd')('koa');
 
+/* class A {
+  constructor() {
+    this.name = 'A';
+    this.age = 24;
+    this.list = [1, 2, 3, 4, 5];
+    this[util.inspect.custom] = () => {
+      const attr = only(this, 'name list');// const attr = only(this, ['name', 'list']);
+      return attr;
+    }
+  }
+}
+const a = new A();
+console.log(a) */
+
+
 /**
  * Expose `Application` class.
  * Inherits from `Emitter.prototype`.
@@ -40,13 +55,14 @@ module.exports = class Application extends Emitter {
   constructor() {
     super();
 
+    this.name = 'koa';
     this.proxy = false;
-    this.middleware = [];
+    this.middleware = [];// -->1
     this.subdomainOffset = 2;
     this.env = process.env.NODE_ENV || 'development';
-    this.context = Object.create(context);
-    this.request = Object.create(request);
-    this.response = Object.create(response);
+    this.context = Object.create(context); // -->2
+    this.request = Object.create(request); // -->3
+    this.response = Object.create(response); // -->4
     if (util.inspect.custom) {
       this[util.inspect.custom] = this.inspect;
     }
@@ -88,7 +104,8 @@ module.exports = class Application extends Emitter {
     return only(this, [
       'subdomainOffset',
       'proxy',
-      'env'
+      'env',
+      'name'
     ]);
   }
 
@@ -118,8 +135,8 @@ module.exports = class Application extends Emitter {
     if (typeof fn !== 'function') throw new TypeError('middleware must be a function!');
     if (isGeneratorFunction(fn)) {
       deprecate('Support for generators will be removed in v3. ' +
-                'See the documentation for examples of how to convert old middleware ' +
-                'https://github.com/koajs/koa/blob/master/docs/migration.md');
+        'See the documentation for examples of how to convert old middleware ' +
+        'https://github.com/koajs/koa/blob/master/docs/migration.md');
       fn = convert(fn);
     }
     debug('use %s', fn._name || fn.name || '-');
