@@ -1,1 +1,3 @@
-/koa-source/node_modules
+**/node_modules
+/koa/demo2-file/upload-files
+/koa/demo3-fileAsync/static/image/album
