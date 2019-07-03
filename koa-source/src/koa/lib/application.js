@@ -63,7 +63,7 @@ module.exports = class Application extends Emitter {
     this.context = Object.create(context); // -->2
     this.request = Object.create(request); // -->3
     this.response = Object.create(response); // -->4
-    if (util.inspect.custom) {
+    if (util.inspect.custom) { // 限定外部能够访问到的属性
       this[util.inspect.custom] = this.inspect;
     }
   }

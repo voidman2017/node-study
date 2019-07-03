@@ -9,7 +9,7 @@ const Middle = require("../middlewares");
 
 
 /*======  首页路由  ======*/
-route.get("/", Ctrl.Home.index, Middle.Handler.render );
+route.get("/", Ctrl.Home.index, Ctrl.Render.PC );
 
 /*======  静态页面  ======*/
 route.get("/static/:filename", Ctrl.Static.index, Ctrl.Render.PC );

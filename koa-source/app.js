@@ -16,10 +16,10 @@ koaEjs(app, {
     debug: false,//dubug
 });
 
-// app.use( Middle.Handler.error );
+app.use( Middle.Handler.error );
 
 //应用路由
-// app.use(routes.routes());
+app.use(routes.routes());
 
 app.use(middleware1);
 
@@ -39,9 +39,9 @@ async function middleware2(ctx, next){
 }
 
 app.listen(CONF.PORT, () => {
-    // console.log("运行环境", process.env.NODE_ENV);
-    // console.log("listen port", CONF.PORT)
+    console.log("运行环境", process.env.NODE_ENV);
+    console.log("listen port", CONF.PORT)
 });
 
 
-// console.log(app)
+console.log(app)
