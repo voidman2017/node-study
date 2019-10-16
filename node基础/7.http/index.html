@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/index.css">
+</head>
+
+<body>
+    <h2>hello</h2>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam nostrum dolorum recusandae eius quisquam saepe
+        dolor numquam tempore iusto deserunt, corporis aliquid iste sequi facere rerum dignissimos, vero quia maiores ab
+        voluptas ipsum. Alias expedita suscipit iure nisi necessitatibus vitae saepe accusantium eligendi at impedit
+        illo, quam sit voluptas veniam molestias fuga? Culpa animi, eum et soluta debitis perferendis eos similique.
+        Sunt expedita numquam vitae explicabo esse amet quaerat, est consectetur quis corrupti veniam, quae provident
+        omnis soluta porro aperiam harum, aliquam dolorum perferendis molestiae eveniet officia ipsum consequatur
+        corporis? Debitis vero pariatur repudiandae expedita dolorem veniam rerum hic odio.</p>
+
+    <script>
+        /*
+        1.jsonp
+        需要前后端协商如何将数据通信，比如这里规定传参 callback 用作数据通信
+        而且请求方式只支持 get 和 post
+        */
+        /*
+        //添加<script>标签的方法
+        function addScriptTag(src) {
+            var script = document.createElement('script');
+            script.setAttribute("type", "text/javascript");
+            script.src = src;
+            document.body.appendChild(script);
+        }
+
+        addScriptTag("http://localhost:3001?callback=showData");
+        function showData(data) {
+            console.log(data)
+        } */
+
+    </script>
+
+    <script>
+        /*
+        2.cors 服务端端设置允许跨域
+        若 request headers 设置了 Content-Type ; xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        则会先发送 method 为 options 的请求。如果请求通过，则继续发送正式的请求。如果不通过，则返回预发请求不通过的提示。
+        此时服务端要设置允许的头部：
+        res.setHeader("Acssess-Control-Allow-Methods", "GET,POST,OPTIONS") //允许的请求方式
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type,Access-Token"); //允许
+         */
+
+        /* var xhr = new XMLHttpRequest();
+        xhr.open("POST", 'http://127.0.0.1:3001', true);
+        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');//request.method 会变成 OPTIONS
+        xhr.onreadystatechange = function () {
+            if (xhr.status == 200) {
+                console.log(xhr)
+                console.log(xhr.response)
+            }
+        };
+        xhr.send(); */
+    </script>
+</body>
+<script>
+    /* 3.服务端跨域
+    前端向本地服务器发送请求，本地服务其代替前端再向目标api服务发送请求，进行服务器间的通信，本地服务器就是中转站的角色。
+    项目中有nginx可以实现.
+    */
+    function ajax(url, method, cb,payload) {
+        var xhr = new XMLHttpRequest();
+        xhr.open(method, url, true);
+        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');//request.method 会变成 OPTIONS
+        xhr.onreadystatechange = function () {
+            if (xhr.status == 200) {
+                cb && cb(xhr)
+            }
+        };
+        xhr.send(payload);
+    }
+
+    ajax('http://127.0.0.1:3000/proxy/api/userinfo','get')
+    ajax('http://127.0.0.1:3000/proxy/common/userinfo','get')
+    
+</script>
+
+</html>
