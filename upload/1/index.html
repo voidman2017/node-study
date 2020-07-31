@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form
+      action="http://localhost:3000"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <h2>文件</h2>
+      <div>
+        <label for="f1">Choose file to upload</label>
+        <input type="file" id="f1" name="f1" />
+      </div>
+      <h2>标题</h2>
+      <input type="text" name="title" />
+      <div>
+        <button type="submit">上传</button>
+      </div>
+    </form>
+  </body>
+</html>
